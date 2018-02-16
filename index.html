@@ -1,0 +1,299 @@
+<html>
+	<head>
+		<title>a-l-e-x-u-s.ru</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+		<link href="img/favicon.jpg" rel="shortcut icon" type="image/x-icon" />
+		<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js"></script>
+		<script src="http://userapi.com/js/api/openapi.js" type="text/javascript" charset="windows-1251"></script>
+		<style type="text/css">
+		body {
+			background-image: url("img/bg.jpg");
+			margin: 0px;
+			padding: 0px;
+		}
+		.page {
+			position: relative;
+			left: 50%;
+			margin-left:-400px;
+
+			background-color: #ffffff;
+			width:800px;
+			-moz-box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Для Firefox */
+    		-webkit-box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Для Safari и Chrome */
+    		box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Параметры тени */
+		}
+		.header {
+			margin-bottom:15px;
+			padding: 15px;
+		}
+		.content {
+			padding: 15px;
+		}
+		.button {
+			display: inline-block;
+			border: 1px dotted #000000;
+			color: #000000;
+			text-decoration:none;
+			padding: 2px;
+			/*float: right;*/
+			margin-right: 15px;
+		}
+		.button:hover {
+			border: 1px solid #000000;
+		}
+		.message {
+			border: 1px dotted #000000;
+			border-radius: 5px;
+			padding-left: 5px;
+			padding-right: 5px;	
+			overflow: hidden;
+		}
+		.soft_img {
+			float: left;
+			padding: 4px;
+		}
+		/*ЗУУУМ*/
+		#zoom {
+			display: none;
+			position: absolute;
+			left:50%;
+			margin-left:-400px;
+			margin-top: 50px;
+			background-color: #FFFFFF;
+			border: 3px dashed #CCCCCC;
+			z-index:1;
+
+			-moz-box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Для Firefox */
+    		-webkit-box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Для Safari и Chrome */
+    		box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Параметры тени */
+		}
+		#zoomed {
+			width:800px;
+		}
+		/*ЗУУУМ*/
+		/*КОММЕНТАРИИ*/
+		.comments_button {
+			font-weight:bold;
+			text-decoration:underline;
+			float: right;
+		}
+		.comments {
+			display: none;
+		}
+		.ajax_link {
+			text-decoration:underline;
+		}		
+		.links , .soft {
+			display: none;
+		}
+		a {
+			color: #000000;
+		}
+		</style>
+		<script type="text/javascript">
+		VK.init({apiId: 2949839, onlyWidgets: true});
+		function ShowPage(page) {
+			if(page=="") return; //если пустой запрос
+			var subpage="";
+			//Составной запрос?
+			if(page.indexOf("-")!=-1) {
+				var req_parts=page.split("-");
+				page=req_parts[0];
+				subpage=req_parts[1];
+			} else {
+				document.location.hash=page;
+				$(".comments").css("display","none");
+			}
+
+			$(".content").css("display","none");
+			$("."+page).css("display","block");
+			ResetMessagesShow();
+
+			//Если запрошена подстраница
+			if(subpage!="") {
+				ShowSubPage(subpage);
+			}
+		}
+		function ShowSubPage(page) {
+				$(".message , .comments_button").css("display","none");
+				$("."+page).css("display","block");
+				var commentsId=$("."+page).children(".comments").attr("id");
+				ShowComments(commentsId);
+		}
+		function ShowComments(commentsId) {
+			$("#"+commentsId).css("display","block");
+			VK.Widgets.Comments(commentsId, {width: 750, limit: 10}, commentsId);
+		} 
+		function ResetMessagesShow() {
+			$(".message , .comments_button").css("display","block");
+		}
+		$(document).ready(function(){
+			//Анализ запроса
+			ShowPage(document.location.hash.replace("#",""));
+
+			//ZOOOM FUNCTIONS
+			$(".zoom").click(function(){
+				var fullsrc=$(this).attr("fullsrc");
+				$("#zoom").css("display","block");
+				var img = new Image();
+				img.onload = function() {
+  					$("#zoomed").attr("src",this.src);
+				}
+				img.src = fullsrc;
+				$("#zoomed").attr("src",fullsrc);
+			});
+			$("#zoom").click(function(){
+				$(this).css("display","none");
+				$("#zoomed").attr("src","screens/loading.gif");
+			});
+
+			//Комментарии
+			$(".comments_button").click(function() {
+				$(".message , .comments_button").css("display","none");
+				$(this).parent().css("display","block");
+				var commentsId=$(this).parent().children(".comments").attr("id");
+				ShowComments(commentsId);
+			});
+
+			$(".ajax_link").click(function() {
+				var page=$(this).attr("href").replace("#","");
+				ShowPage(page);
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<div id="zoom">
+			<img src="screens/loading.gif" id="zoomed">
+		</div>
+		<!--ШАПКА САЙТА-->
+		<div class="page header">
+			<center><img src="img/logo.jpg" width="200px" alt="Alexus"></center>
+			<a href="#main" onclick="ShowPage('main');return false;" class="button">Мысли</a>
+			<a href="#soft" onclick="ShowPage('soft');return false;" class="button">Софт</a>
+			<a href="#links" onclick="ShowPage('links');return false;" class="button">Ссылки</a>
+		</div>
+		<!--ГЛАВНАЯ СТРАНИЦА-->
+		<div class="page content main">
+			<div class="message imail_v1_3">
+				<div class="message_content">
+					<h2>йаПосылалка v1.3 - Обновление</h2>
+					<p>
+						Новая версия моего скрипта для анонимной отправки почты. Второе существенное обновление. Переделал систему шаблонов теперь они стали макросами, так как появились настоящие шаблоны писем, а моё знакомство с дорвеями подкинуло более верное название. Ещё из приятного это безлимитное количество дополнительных полей и функция реверсинга для обхода фильтров в почтовиках, хотя она весьма эксперементальна и в будующем потребует доделки.
+					</p>
+					<p>
+						Хочу попробовать начать продавать эту версию, наверняка она пригодится не только мне. Подробнее о йаПосылалка <a href="#soft-imail" class="ajax_link">тут</a> 
+					</p>
+				</div>
+				<div id="imail_v1_3_comments" class="comments"></div>
+				<span class="comments_button"><a href="#main-imail_v1_3">Комментарии</a></span>
+			</div>
+			<div class="message redone">
+				<div class="message_content">
+					<h2>Маштабная модификация</h2>
+					<p>
+						Сильно обновил ajax движок, теперь есть поддержка подстраниц, интегрировал комментарии от ВК, добавил свой скрипт увеличения картинки. Немного поколдовал и улучшил отображение в IE, путь хотябы центрирование будет.
+					</p>
+					<p>
+						Добавил описание двух прог в раздел созданного мной софта <a href="#soft-imail" class="ajax_link">йаПосылалка</a> и <a href="#soft-skyper" class="ajax_link">Скайпер</a>, первая это достаточно продвинутый скрипт анонимной отправки, превосходит большинство аналогов, хотя есть куда расти, да и продаётся она нормально. Второй это тестовая версия проги для массовой рассылки по списку контактов. Чуть позже добавлю ещё, хотя разумеется мой основной рабочий софт тут не появится.
+					</p>
+				</div>
+				<div id="redone_comments" class="comments"></div>
+				<span class="comments_button"><a href="#main-redone">Комментарии</a></span>
+			</div>
+			<div class="message modif">
+				<div class="message_content">
+					<h2>Модификация сайта</h2>
+					<p>
+						Доделал аяксовую многостраничную навигацию (мне лень чтобы в сайте было больше одного файла, это ведь заглушка в первую очередь, а не сайт). Забил раздел ссылок, там бложики которые я открываю если становится скучно. Раздел софта пока хз как заполнять, там надо аяксовое увеличение картинки, но я не хочу добавлять какую-нибудь большую фигню типо fancybox, будет стимул написать свою компактную реализацию.
+					</p>
+					<p>
+						И да, на всякий случай сразу замечу. Мне плевать как выглядит этот сайт в IE, и как хорошо он индексируется поисковиками, не та у него цель. Дат у "мыслей" не будет, дабы не показывать как редко я сюда пишу.
+					</p>
+				</div>
+				<div id="modif_comments" class="comments"></div>
+				<span class="comments_button"><a href="#main-modif">Комментарии</a></span>
+			</div>
+			<div class="message open">
+				<div class="message_content">
+					<h2>Открытие сайта</h2>
+					<p>
+						Пусть уже висит что-то по этому адресу, а то неприлично иметь сайт, но ничего никому на нём не показывать =).
+					</p>
+				</div>
+				<div id="open_comments" class="comments"></div>
+				<span class="comments_button"><a href="#main-open">Комментарии</a></span>
+			</div>
+		</div>
+		<!--ССЫЛКИ-->
+		<div class="page content links">
+			<div class="message">
+				<h2>Интересные по моему мнению ссылки</h2>
+				<p>
+					<ul>
+						<li><a href="http://socialware.ru/" target="_blank">Проект о социальной инженерии SocialWare</a></li>
+						<li><a href="http://0x0000ed.com/" target="_blank">Блог о PHP и Веб-Безопасности</a></li>
+						<li><a href="http://bo0om.ru/" target="_blank">Взрывной блог Bo0oM</a></li>
+						<li><a href="http://mrthe.name/" target="_blank">Блог mr.The</a></li>
+					</ul>
+				</p>
+			</div>
+		</div>
+		<!--СОФТ-->
+		<div class="page content soft">
+			<div class="message">
+				<h2>Списка софта пока нет</h2>
+				<p>
+					Список сделанного мной софта или отсутствует или неполный если вы видете это сообщение. И провисит оно тут скорее всего вечно.
+				</p>
+			</div>
+			<div class="message imail">
+				<h2>йаПосылалка v1.3</h2>
+				<div class="message_content">
+					<p><img src="screens/imail_m.jpg" fullsrc="screens/imail.jpg" class="zoom soft_img">
+						Скрипт анонимной отправки почты на php через функцию send (требуется sendmail или аналог).<br>
+						<ul style="margin-left:200px;">
+							<li>Всего 1ин файл</li>
+							<li>Ajax интерфейс</li>
+							<li>Многопоточная отправка с историей(Есть подгрузка списка из файла)</li>
+							<li>Макросы в тексте письма и полях (есть безлимитные дополнительные поля макросов)</li>
+							<li>Сохранение и загрузка шаблона письма</li>
+							<li>Эксперементальная функция переноса картинок из ссылок в аттач</li>
+							<li>Эксперементальная функция обхода фильтров через реверсинг слов с нормализацией средствами CSS</li>
+						</ul>
+					</p>
+				</div>
+				<div id="imail_comments" class="comments"></div>
+				<span class="comments_button"><a href="#soft-imail">Комментарии</a></span>
+			</div>
+			<div class="message skyper">
+				<div class="message_content">
+					<h2>Скайпер v0.8 (Рабочее имя Skype Sender)</h2>
+					<p><img src="screens/skyper_m.jpg" fullsrc="screens/skyper.jpg" class="zoom soft_img">
+						Тестовая версия программы массовой рассылки по списку контактов<br>
+						Разработка началась совсем недавно и пока это прототип накиданый за пару часов, но перспектива у программы большая и она неизбежно будет развиваться.
+						<ul style="margin-left:200px;">
+							<li>Подгрузка контактов из запущенного skype</li>
+							<li>Возможность разослать только выбранным</li>
+						</ul>
+						Планируемое:
+						<ul style="margin-left:200px;">
+							<li>Улучшение интерфейса</li>
+							<li>Распределение контактов по группам</li>
+						</ul>
+					</p>
+				</div>
+				<div id="skyper_comments" class="comments"></div>
+				<span class="comments_button"><a href="#soft-skyper">Комментарии</a></span>
+			</div>
+			
+		</div>	
+		<!--ОСТАЛЬНЫЕ ПОДСТРАНИЧКИ-->	
+
+
+		<!--ФУТЕР САЙТА-->
+		<center><div class="footer">
+			<a href="mailto:alexusblack@gmail.com"><img src="img/mail.png" border=0  style="vertical-align: middle;"><b style="vertical-align: middle;">alexusblack@gmail.com</b></a>
+		</div></center>
+	</body>
+</html>

@@ -1,0 +1,83 @@
+body {
+	background-image: url("img/bg.jpg");
+	margin: 0px;
+	padding: 0px;
+}
+.page {
+	position: relative;
+	left: 50%;
+	margin-left:-400px;
+
+	background-color: #ffffff;
+	width:800px;
+	-moz-box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Для Firefox */
+	-webkit-box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Для Safari и Chrome */
+	box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Параметры тени */
+}
+.header {
+	margin-bottom:15px;
+	padding: 15px;
+}
+.content {
+	padding: 15px;
+}
+.button {
+	display: inline-block;
+	border: 1px dotted #000000;
+	color: #000000;
+	text-decoration:none;
+	padding: 2px;
+	/*float: right;*/
+	margin-right: 15px;
+}
+.button:hover {
+	border: 1px solid #000000;
+}
+.message {
+	border: 1px dotted #000000;
+	border-radius: 5px;
+	padding-left: 5px;
+	padding-right: 5px;	
+	overflow: hidden;
+}
+.soft_img {
+	float: left;
+	padding: 4px;
+}
+/*ЗУУУМ*/
+#zoom {
+	display: none;
+	position: absolute;
+	left:50%;
+	margin-left:-400px;
+	margin-top: 50px;
+	background-color: #FFFFFF;
+	border: 3px dashed #CCCCCC;
+	z-index:1;
+
+	-moz-box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Для Firefox */
+	-webkit-box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Для Safari и Chrome */
+	box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Параметры тени */
+}
+#zoomed {
+	width:800px;
+}
+/*ЗУУУМ*/
+/*КОММЕНТАРИИ*/
+.comments_button {
+	font-weight:bold;
+	text-decoration:underline;
+	float: right;
+}
+.comments {
+	display: none;
+}
+.ajax_link {
+	text-decoration:underline;
+}		
+.links , .soft {
+	display: none;
+}
+a {
+	color: #000000;
+}
