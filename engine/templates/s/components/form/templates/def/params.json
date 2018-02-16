@@ -1,0 +1,26 @@
+{	
+	"fio":{
+		"requered":"true",
+		"deprecated_symbols":"\"'@<>&"
+	},
+	"email":{
+		"requered":"true",
+		"deprecated_symbols":"\"'<>&"
+	},
+	"phone":{
+		"requered":"true",
+		"deprecated_symbols":"\"'@<>&"
+	},
+	"ves":{
+		"requered":"true",
+		"deprecated_symbols":"\"'@<>&"
+	},
+	"objem":{
+		"requered":"true",
+		"deprecated_symbols":"\"'@<>&"
+	},
+	"description":{
+		"requered":"true",
+		"deprecated_symbols":"\"'@<>&"
+	}
+}

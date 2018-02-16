@@ -1,0 +1,12 @@
+{	
+	"login":{
+		"requered":"true",
+		"symbols":"A-Za-z_-",
+		"deprecated_symbols":"\"'@",
+		"compare":"^[A-Za-z_-]+$"
+	},
+	"name":{
+		"requered":"false",
+		"deprecated_symbols":"\"'"
+	}
+}

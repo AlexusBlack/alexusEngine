@@ -1,0 +1,1 @@
+{* no need in template code *}

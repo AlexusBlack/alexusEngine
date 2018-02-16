@@ -1,0 +1,14 @@
+{	
+	"name":{
+		"requered":"true",
+		"deprecated_symbols":"\"'@<>&"
+	},
+	"email":{
+		"requered":"true",
+		"deprecated_symbols":"\"'<>"
+	},
+	"text":{
+		"requered":"true",
+		"deprecated_symbols":"<>"
+	}
+}

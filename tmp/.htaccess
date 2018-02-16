@@ -1,0 +1,16 @@
+AddDefaultCharset utf8
+RewriteEngine on
+php_flag display_errors off
+DirectoryIndex index.php
+
+Options +FollowSymlinks -Indexes
+RewriteBase /
+RewriteCond %{REQUEST_URI} !^(.*)\.php$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?pid=$1 [L,QSA]
+
+RewriteCond %{HTTP_HOST} ^www.svoichelovek\.ru
+RewriteRule ^(.*)$ http://svoichelovek.ru/$1 [R=permanent,L]
+redirect /seo-cat/ http://svoichelovek.ru/
+redirect /price/ http://svoichelovek.ru/
