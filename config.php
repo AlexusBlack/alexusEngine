@@ -10,7 +10,7 @@ $config=array(
 	"site_root"		=>"/",
 	"admin"=>array(
 		"login"		=>"admin",
-		"password"	=>"b4d788aebcc36093a5c1aaa8a28eb286"
+		"password"	=>"76419c58730d9f35de7ac538c2fd6737" // qazwsx
 	)
 );
 
